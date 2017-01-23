@@ -3,8 +3,138 @@
   <head>
     <meta charset="utf-8">
     <title>Тест</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.18/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.18/esri/css/esri.css">
+
+    <script src="https://js.arcgis.com/3.18/"></script>
+    <script>var dojoConfig = { parseOnLoad: true };</script>
+    <script>
+      var map;
+
+    require([
+      "esri/map",
+      "esri/config",
+     "esri/layers/FeatureLayer",
+      "esri/TimeExtent",
+      "esri/dijit/HistogramTimeSlider",
+      "esri/dijit/BasemapGallery",
+      "esri/InfoTemplate",
+      "dojo/dom-construct",
+      "esri/dijit/Scalebar",
+      "esri/dijit/Popup",
+      "esri/dijit/LayerSwipe",
+        "esri/dijit/LayerList",
+      "esri/dijit/PopupTemplate",
+      "esri/dijit/Search",
+    "esri/dijit/HomeButton",
+    "esri/dijit/Measurement",
+      "esri/symbols/TextSymbol",
+      "esri/renderers/UniqueValueRenderer",
+    "esri/renderers/ClassBreaksRenderer",
+  "esri/renderers/SimpleRenderer",
+  "esri/renderers/ScaleDependentRenderer",
+      "esri/layers/LabelClass",
+      "esri/symbols/SimpleMarkerSymbol",
+  "esri/symbols/SimpleLineSymbol",
+  "esri/symbols/SimpleFillSymbol",
+      "esri/symbols/PictureMarkerSymbol",
+      "esri/tasks/GeometryService",
+      "esri/Color",
+      "esri/dijit/Legend",
+    "dojo/_base/array",
+      "dojo/parser",
+    "dojo/_base/connect",
+    "dojo/on",
+      "dojo/dom",
+    "dojox/charting/Chart", "dojox/charting/themes/Dollar",
+      "dijit/registry",
+    "dijit/layout/BorderContainer",
+      "dijit/layout/ContentPane",
+    "dijit/TitlePane",
+    "dijit/form/CheckBox",
+      "dijit/layout/AccordionContainer",
+      "dojo/domReady!"
+      ],
+
+    function(
+      Map,
+      esriConfig,
+
+      FeatureLayer,
+      TimeExtent,
+      HistogramTimeSlider,
+      BasemapGallery,
+      InfoTemplate,
+      domConstruct,
+      Scalebar,
+      Popup,
+    LayerSwipe,
+    LayerList,
+      PopupTemplate,
+      Search,
+    HomeButton,
+    Measurement,
+      TextSymbol,
+  UniqueValueRenderer,
+  ClassBreaksRenderer,
+  SimpleRenderer,
+  ScaleDependentRenderer,
+      LabelClass,
+      SimpleMarkerSymbol,
+  SimpleLineSymbol,
+  SimpleFillSymbol,
+  PictureMarkerSymbol,
+      GeometryService,
+      Color,
+      Legend,
+    arrayUtils,
+      parser,
+    connect,
+    on,
+          dom,Chart,theme,
+          registry
+        )
+      {
+        parser.parse();
+
+        map = new Map("map", {
+          basemap:"osm",
+          center: [55.8, 54.4],
+          zoom: 7,
+          logo:false,
+      showLabels : true
+
+        });
+
+        //шкала
+        var scalebar = new Scalebar({
+          map: map,
+          attachTo: "bottom-left",
+          scalebarUnit: "metric"
+        });
+
+        //поиск
+        var search = new Search({
+          enableButtonMode: false,
+          enableLabel: true,
+          enableInfoWindow: true,
+          showInfoWindowOnSelect: true,
+          map: map
+        }, "search");
+
+        var adm_regions = new FeatureLayer("https://services7.arcgis.com/95YPxf7twZlsxydt/ArcGIS/rest/services/%D0%A0%D0%B5%D1%81%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B0_%D0%91%D0%B0%D1%88%D0%BA%D0%BE%D1%80%D1%82%D0%BE%D1%81%D1%82%D0%B0%D0%BD/FeatureServer/3",
+          mode: FeatureLayer.MODE_SNAPSHOT,
+          outFields: ["*"]
+      )
+
+      map.addLayers([adm_regions]);
+      });
+
+    </script>
   </head>
   <body>
     <h1>это тест!</h1>
+    <div class="map">
+    </div>
   </body>
 </html>
